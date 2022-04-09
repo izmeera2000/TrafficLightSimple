@@ -41,300 +41,70 @@ void setup()
   pinMode(D0, OUTPUT);
   pinMode(D1, OUTPUT);
   pinMode(D2, OUTPUT);
-      digitalWrite(D0, HIGH);
-    digitalWrite(D1, LOW);
-    digitalWrite(D2, LOW);
+  digitalWrite(D0, HIGH);
+  digitalWrite(D1, LOW);
+  digitalWrite(D2, LOW);
 }
 
 void loop()
 {
   Blynk.run();
-  
+
 
 }
 
-void blinkgreen()
+void slowbeep(int y)
 {
+  for (int i = y ; i >= 0 ; i--) {
+
+    digitalWrite(D2, HIGH);
+    delay(500);
+    digitalWrite(D2, LOW);
+    delay(500);
+  }
+}
+
+void fastbeep(int z)
+{
+  for (int i = z ; i >= 0 ; i--) {
+    digitalWrite(D2, HIGH);
+    delay(250);
+    digitalWrite(D2, LOW);
+    delay(250);
+  }
+}
+
+
+void greenlblink(int x)
+{
+  for (int i = x ; i >= 0 ; i--) {
     digitalWrite(D0, HIGH);//green
     delay(500);
     digitalWrite(D0, LOW);//green
     delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-        digitalWrite(D0, HIGH);//green
-    delay(500);
-    digitalWrite(D0, LOW);//green
-    delay(500);
-    //1sec
-
-}
-
-void beeperA()
-{
-  digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(500);
-    digitalWrite(D2,LOW);
-  delay(500);
-  //1sec
-}
-
-void beeperB()
-{
-  digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
-    digitalWrite(D2,HIGH);
-  delay(250);
-    digitalWrite(D2,LOW);
-  delay(250);
-  //1sec
+  }
 }
 
 BLYNK_WRITE(V0)
 {
   int pinValue = param.asInt();
 
-if(pinValue == 1){
-  blinkgreen();
-  digitalWrite(D0, LOW);
-  digitalWrite(D1, HIGH);
-  beeperA();
-  beeperB();
+  if (pinValue == 1) {
+
+    greenlblink(10);
+    digitalWrite(D0, LOW);
+    digitalWrite(D1, HIGH);
+    slowbeep(20);
+    fastbeep(10);
     digitalWrite(D1, LOW);
 
   }
-  else{ 
+  else {
     digitalWrite(D0, HIGH);
     digitalWrite(D1, LOW);
     digitalWrite(D2, LOW);
 
-  
+
   }
 
 }
