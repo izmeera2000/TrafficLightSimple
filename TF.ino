@@ -9,150 +9,299 @@
 #define BLYNK_PRINT Serial
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
-
+int period = 1000;
+unsigned long time_now = 0;
 char auth[] = BLYNK_AUTH_TOKEN;
 char ssid[] = "OPPORTUNITY";
 char pass[] = "12345679";
-
-
+int state = 0;
+boolean RunArd = false;
+boolean pressbutton = false;
 BlynkTimer timer;
+
+
+
+#define RPIN D0
+#define VRPIN V5
+#define GPIN D1
+#define VGPIN V4
+#define BUZZ D2
+
 
 void setup()
 {
   // Debug console
   Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
-  pinMode(16, OUTPUT);//g
-  pinMode(5, OUTPUT);//r
-  pinMode(4, OUTPUT);//buzzer
-  digitalWrite(16, HIGH);
-  digitalWrite(5, LOW);
-  digitalWrite(4, LOW);
+
+  pinMode(RPIN, OUTPUT);//r
+  pinMode(GPIN, OUTPUT);//g
+  pinMode(BUZZ, OUTPUT);//buzzer
+  //  digitalWrite(  , HIGH);
+  //  digitalWrite(5, LOW);
+  //  digitalWrite(4, LOW);
+  //  timer.setInterval(100L, checkPinV);
+  //  timer.setInterval(100L, coder);
+  //  Blynk.virtualWrite(VGPIN, 0);
+  //  Blynk.virtualWrite(VRPIN, 0);
+  digitalWrite(GPIN, LOW);
+  digitalWrite(RPIN, LOW);
+  digitalWrite(BUZZ, LOW);
 }
 
-void myTimerEvent()
+
+
+
+BLYNK_WRITE(V0)//cancel
 {
-  // You can send any value at any time.
-  // Please don't send more that 10 values per second.
-  Blynk.virtualWrite(V2, millis() / 1000);
+  int value0 = param.asInt(); // Get value as integer
+  if (value0 == 1 )
+  { state = 0;
+    Serial.print(state);
+  }
+}
+BLYNK_WRITE(V1)// 7m
+{
+  int value1 = param.asInt(); // Get value as integer
+  if (value1 == 1 )
+  { state = 1;
+    Serial.print(state);
+  }
+}
+BLYNK_WRITE(V2)// 14m
+{
+  int value2 = param.asInt(); // Get value as integer
+  if (value2 == 1 )
+  { state = 2;
+    Serial.print(state);
+  }
+}
+BLYNK_WRITE(V3)// 21m
+{
+  int value3 = param.asInt(); // Get value as integer
+  if (value3 == 1 )
+  { state = 3;
+    Serial.print(state);
+  }
+}
+void cancel()
+{
+  state = 0;
+  //  Blynk.virtualWrite(VGPIN, 0);
+  //  Blynk.virtualWrite(VRPIN, 0);
+  digitalWrite(GPIN, LOW);
+  digitalWrite(RPIN, LOW);
+  digitalWrite(BUZZ, LOW);
+}
+
+void start7()
+{ for ( int i = 0 ; i < 10; i++)
+  {
+    if (state == 1) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(GPIN, HIGH);
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(GPIN, LOW);
+      delay(500);
+    }
+  }
+
+  if (state == 1)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(RPIN, HIGH);
+
+  }
+  for ( int i = 0 ; i < 20; i++)
+  {
+    if (state == 1) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(500);
+    }
+  }
+  for ( int i = 0 ; i < 20; i++)
+  {
+    if (state == 1) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(250);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(250);
+    }
+  }
+  if (state == 1)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 0);
+    digitalWrite(RPIN, LOW);
+
+  }
+
+
+  state = 0;
+}
+
+void start14()
+{ for ( int i = 0 ; i < 10; i++)
+  {
+    if (state == 2) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(GPIN, HIGH);
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(GPIN, LOW);
+      delay(500);
+    }
+  }
+
+  if (state == 2)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(RPIN, HIGH);
+
+  }
+  for ( int i = 0 ; i < 50; i++)
+  {
+    if (state == 2) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(500);
+    }
+  }
+  for ( int i = 0 ; i < 20; i++)
+  {
+    if (state == 2) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(250);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(250);
+    }
+  }
+  if (state == 2)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 0);
+    digitalWrite(RPIN, LOW);
+
+  }
+
+
+  state = 0;
+}
+
+
+void start21()
+{ for ( int i = 0 ; i < 10; i++)
+  {
+    if (state == 3) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(GPIN, HIGH);
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(GPIN, LOW);
+      delay(500);
+    }
+  }
+
+  if (state == 3)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(RPIN, HIGH);
+
+  }
+  for ( int i = 0 ; i < 80; i++)
+  {
+    if (state == 3) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(500);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(500);
+    }
+  }
+  for ( int i = 0 ; i < 20; i++)
+  {
+    if (state == 3) {
+
+
+      Blynk.syncVirtual(V0, V1, V2, V3);
+      //      Blynk.virtualWrite(VGPIN, 1);
+      digitalWrite(BUZZ, HIGH);
+
+      delay(250);
+      //      Blynk.virtualWrite(VGPIN, 0);
+      digitalWrite(BUZZ, LOW);
+
+      delay(250);
+    }
+  }
+  if (state == 3)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
+    //    Blynk.virtualWrite(VRPIN, 0);
+    digitalWrite(RPIN, LOW);
+
+  }
+
+
+  state = 0;
 }
 
 void loop()
-{ Blynk.run();
-timer.run();
-  
-}
-
-void slowbeep(int y)
 {
-  for (int i = y ; i >= 0 ; i--) {
-    digitalWrite(4, HIGH);
-    delay(500);
-    digitalWrite(4, LOW);
-    delay(500);
-  }
-}
-
-void fastbeep(int z)
-{
-  for (int i = z ; i >= 0 ; i--) {
-    digitalWrite(4, HIGH);
-    delay(250);
-    digitalWrite(4, LOW);
-    delay(250);
-  }
-}
-
-
-void greenlblink(int x)
-{
-  for (int i = x ; i >= 0 ; i--) {
-    digitalWrite(16, HIGH);//green
-      Blynk.virtualWrite(V6, HIGH);
-
-    delay(500);
-    digitalWrite(16, LOW);//green
-          Blynk.virtualWrite(V6, LOW);
-
-    delay(500);
-  }
-}
-
-BLYNK_WRITE(V0)
-{
-  int pinValue = param.asInt();
-
-
-
-  if (pinValue == 1) {
-  timer.setInterval(1000L, myTimerEvent);
-
-    greenlblink(10);
-    digitalWrite(16, LOW);
-          Blynk.virtualWrite(V6, LOW);
-
-    digitalWrite(5, HIGH);
-              Blynk.virtualWrite(V5, HIGH);
-
-    slowbeep(20);
-    fastbeep(10);
-    digitalWrite(5, LOW);
-  }
-  else {
-    digitalWrite(16, HIGH);
-                  Blynk.virtualWrite(V6, HIGH);
-
-    digitalWrite(5, LOW);
-              Blynk.virtualWrite(V5, LOW);
-
-    digitalWrite(4, LOW);
-
-
-  }
-
-}
-
-BLYNK_WRITE(V1)
-{
-  int pinValue = param.asInt();
-
-  if (pinValue == 1) {
-
-    greenlblink(10);
-    digitalWrite(16, LOW);
-    digitalWrite(5, HIGH);
-    slowbeep(50);
-    fastbeep(10);
-    digitalWrite(5, LOW);
-  }
-  else {
-    digitalWrite(16, HIGH);
-    digitalWrite(5, LOW);
-    digitalWrite(4, LOW);
-
-
-  }
-
-}
-BLYNK_WRITE(V2)
-{
-  int pinValue = param.asInt();
-
-  if (pinValue == 1) {
-
-    greenlblink(10);
-    digitalWrite(16, LOW);
-    digitalWrite(5, HIGH);
-    slowbeep(80);
-    fastbeep(10);
-    digitalWrite(5, LOW);
-  }
-  else {
-    digitalWrite(16, HIGH);
-    digitalWrite(5, LOW);
-    digitalWrite(4, LOW);
-
-
-  }
-
+  Blynk.run();
+  //  timer.run();
+  if (state == 0)cancel();
+  if (state == 1)start7();
+    if (state == 2)start14();
+    if (state == 3)start21();
 }
