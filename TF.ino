@@ -44,7 +44,7 @@ void setup()
   //  timer.setInterval(100L, coder);
   //  Blynk.virtualWrite(VGPIN, 0);
   //  Blynk.virtualWrite(VRPIN, 0);
-  digitalWrite(GPIN, LOW);
+  digitalWrite(GPIN, HIGH);
   digitalWrite(RPIN, LOW);
   digitalWrite(BUZZ, LOW);
 }
@@ -89,7 +89,7 @@ void cancel()
   state = 0;
   //  Blynk.virtualWrite(VGPIN, 0);
   //  Blynk.virtualWrite(VRPIN, 0);
-  digitalWrite(GPIN, LOW);
+  digitalWrite(GPIN, HIGH;
   digitalWrite(RPIN, LOW);
   digitalWrite(BUZZ, LOW);
 }
