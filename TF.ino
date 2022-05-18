@@ -9,15 +9,10 @@
 #define BLYNK_PRINT Serial
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
-int period = 1000;
-unsigned long time_now = 0;
 char auth[] = BLYNK_AUTH_TOKEN;
 char ssid[] = "OPPORTUNITY";
 char pass[] = "12345679";
-int state = 0;
-boolean RunArd = false;
-boolean pressbutton = false;
-BlynkTimer timer;
+
 
 
 
@@ -25,25 +20,19 @@ BlynkTimer timer;
 #define VRPIN V5
 #define GPIN D1
 #define VGPIN V4
-#define BUZZ D2
+#define BUZZ D6
+int state = 0;
 
 
 void setup()
 {
-  // Debug console
   Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
 
   pinMode(RPIN, OUTPUT);//r
   pinMode(GPIN, OUTPUT);//g
   pinMode(BUZZ, OUTPUT);//buzzer
-  //  digitalWrite(  , HIGH);
-  //  digitalWrite(5, LOW);
-  //  digitalWrite(4, LOW);
-  //  timer.setInterval(100L, checkPinV);
-  //  timer.setInterval(100L, coder);
-  //  Blynk.virtualWrite(VGPIN, 0);
-  //  Blynk.virtualWrite(VRPIN, 0);
+
   digitalWrite(GPIN, HIGH);
   digitalWrite(RPIN, LOW);
   digitalWrite(BUZZ, LOW);
@@ -87,9 +76,8 @@ BLYNK_WRITE(V3)// 21m
 void cancel()
 {
   state = 0;
-  //  Blynk.virtualWrite(VGPIN, 0);
-  //  Blynk.virtualWrite(VRPIN, 0);
-  digitalWrite(GPIN, HIGH;
+
+  digitalWrite(GPIN, HIGH);
   digitalWrite(RPIN, LOW);
   digitalWrite(BUZZ, LOW);
 }
@@ -101,19 +89,21 @@ void start7()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
-      digitalWrite(GPIN, HIGH);
-      delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(GPIN, LOW);
+      delay(500);
+      digitalWrite(GPIN, HIGH);
       delay(500);
     }
   }
-
   if (state == 1)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(GPIN, LOW);
+
+  }
+  if (state == 1)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
     digitalWrite(RPIN, HIGH);
 
   }
@@ -123,11 +113,9 @@ void start7()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(500);
@@ -139,11 +127,9 @@ void start7()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(250);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(250);
@@ -152,7 +138,6 @@ void start7()
   if (state == 1)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 0);
     digitalWrite(RPIN, LOW);
 
   }
@@ -168,19 +153,21 @@ void start14()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
-      digitalWrite(GPIN, HIGH);
-      delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(GPIN, LOW);
+      delay(500);
+      digitalWrite(GPIN, HIGH);
       delay(500);
     }
   }
-
   if (state == 2)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(GPIN, LOW);
+
+  }
+  if (state == 2)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
     digitalWrite(RPIN, HIGH);
 
   }
@@ -190,11 +177,9 @@ void start14()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(500);
@@ -206,11 +191,9 @@ void start14()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(250);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(250);
@@ -219,7 +202,6 @@ void start14()
   if (state == 2)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 0);
     digitalWrite(RPIN, LOW);
 
   }
@@ -236,19 +218,21 @@ void start21()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
-      digitalWrite(GPIN, HIGH);
-      delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(GPIN, LOW);
+      delay(500);
+      digitalWrite(GPIN, HIGH);
       delay(500);
     }
   }
-
   if (state == 3)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 1);
+    digitalWrite(GPIN, LOW);
+
+  }
+  if (state == 3)
+  {
+    Blynk.syncVirtual(V0, V1, V2, V3);
     digitalWrite(RPIN, HIGH);
 
   }
@@ -258,11 +242,9 @@ void start21()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(500);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(500);
@@ -274,11 +256,9 @@ void start21()
 
 
       Blynk.syncVirtual(V0, V1, V2, V3);
-      //      Blynk.virtualWrite(VGPIN, 1);
       digitalWrite(BUZZ, HIGH);
 
       delay(250);
-      //      Blynk.virtualWrite(VGPIN, 0);
       digitalWrite(BUZZ, LOW);
 
       delay(250);
@@ -287,7 +267,6 @@ void start21()
   if (state == 3)
   {
     Blynk.syncVirtual(V0, V1, V2, V3);
-    //    Blynk.virtualWrite(VRPIN, 0);
     digitalWrite(RPIN, LOW);
 
   }
@@ -299,9 +278,8 @@ void start21()
 void loop()
 {
   Blynk.run();
-  //  timer.run();
   if (state == 0)cancel();
   if (state == 1)start7();
-    if (state == 2)start14();
-    if (state == 3)start21();
+  if (state == 2)start14();
+  if (state == 3)start21();
 }
